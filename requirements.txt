@@ -1,0 +1,9 @@
+# File: requirements.txt
+
+torch
+torchvision
+matplotlib
+mlflow
+tensorboard
+scikit-learn
+dvc
