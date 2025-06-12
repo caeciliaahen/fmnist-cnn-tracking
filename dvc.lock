@@ -1,0 +1,30 @@
+schema: '2.0'
+stages:
+  train_cnn:
+    cmd: python3 train.py
+    deps:
+    - path: src/data.py
+      hash: md5
+      md5: 1d3453eff51a6f7417bd51e12223773e
+      size: 1222
+    - path: src/evaluate.py
+      hash: md5
+      md5: c54ef1d0fb04c3b408c8d3d04867e8ee
+      size: 751
+    - path: src/model.py
+      hash: md5
+      md5: 916e6a2ed9c980a5de5ad56920c4b60e
+      size: 964
+    - path: src/train.py
+      hash: md5
+      md5: 4efff06245a168c4b1ac6c6df646bfd7
+      size: 3175
+    outs:
+    - path: outputs/metrics.json
+      hash: md5
+      md5: b4c6465b819e6cca66ad15cfad08830f
+      size: 64
+    - path: outputs/model.pth
+      hash: md5
+      md5: 8455e8e169ca7b77a4270e7149ec69ae
+      size: 1689256
