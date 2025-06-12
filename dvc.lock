@@ -5,7 +5,7 @@ stages:
     deps:
     - path: params.yaml
       hash: md5
-      md5: ad625cb76509f6b0eb3aa27aabc65f3c
+      md5: 694d8afb8f986158ecf2d480426bd2f6
       size: 58
     - path: src/data.py
       hash: md5
@@ -31,13 +31,13 @@ stages:
       params.yaml:
         batch_size: 64
         epochs: 10
-        lr: 0.0005
+        lr: 0.0001
     outs:
     - path: outputs/metrics.json
       hash: md5
-      md5: 76d423c58ad954e37ff3ef9cbe23b931
-      size: 63
+      md5: 8763ed187143312ad3600909f3d60007
+      size: 64
     - path: outputs/model.pth
       hash: md5
-      md5: cba07986f0edb8cc7921dea596b4394f
+      md5: e4aec7ce5759f9e666b288ef7cab48d8
       size: 1689256
