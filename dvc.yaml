@@ -1,0 +1,12 @@
+stages:
+  train_cnn:
+    cmd: python train.py
+    deps:
+    - src/data.py
+    - src/evaluate.py
+    - src/model.py
+    - src/train.py
+    outs:
+    - outputs/model.pth
+    metrics:
+    - outputs/metrics.json
