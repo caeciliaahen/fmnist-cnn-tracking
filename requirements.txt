@@ -6,4 +6,8 @@ matplotlib
 mlflow
 tensorboard
 scikit-learn
-dvc
+dvcdvc stage add --force -n train_cnn \
+  -d src/train.py -d src/data.py -d src/model.py -d src/evaluate.py \
+  -o outputs/model.pth \
+  -m outputs/metrics.json \
+  python train.py

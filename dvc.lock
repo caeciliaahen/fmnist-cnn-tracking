@@ -3,28 +3,41 @@ stages:
   train_cnn:
     cmd: python3 train.py
     deps:
+    - path: params.yaml
+      hash: md5
+      md5: ad625cb76509f6b0eb3aa27aabc65f3c
+      size: 58
     - path: src/data.py
       hash: md5
       md5: 1d3453eff51a6f7417bd51e12223773e
       size: 1222
     - path: src/evaluate.py
       hash: md5
-      md5: c54ef1d0fb04c3b408c8d3d04867e8ee
-      size: 751
+      md5: e454bd24d6dd3eb9f421bd5569b6f830
+      size: 1583
     - path: src/model.py
       hash: md5
-      md5: 916e6a2ed9c980a5de5ad56920c4b60e
-      size: 964
+      md5: b8ce280f8df6207c619fc86b5cf80f5b
+      size: 951
     - path: src/train.py
       hash: md5
-      md5: 4efff06245a168c4b1ac6c6df646bfd7
-      size: 3175
+      md5: 04d36af8574a3e8c5c38911df0f7f2de
+      size: 3997
+    - path: train.py
+      hash: md5
+      md5: 72661db0b3739ec3cedd3a003b0ee7f8
+      size: 276
+    params:
+      params.yaml:
+        batch_size: 64
+        epochs: 10
+        lr: 0.0005
     outs:
     - path: outputs/metrics.json
       hash: md5
-      md5: b4c6465b819e6cca66ad15cfad08830f
-      size: 64
+      md5: 76d423c58ad954e37ff3ef9cbe23b931
+      size: 63
     - path: outputs/model.pth
       hash: md5
-      md5: 8455e8e169ca7b77a4270e7149ec69ae
+      md5: cba07986f0edb8cc7921dea596b4394f
       size: 1689256

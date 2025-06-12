@@ -1,12 +1,30 @@
 stages:
   train_cnn:
-    cmd: python train.py
+    cmd: python3 train.py
     deps:
-    - src/data.py
-    - src/evaluate.py
-    - src/model.py
-    - src/train.py
+      - src/train.py
+      - src/data.py
+      - src/model.py
+      - src/evaluate.py
+      - train.py
+      - params.yaml
+    params:
+      - lr
+      - batch_size
+      - epochs
     outs:
-    - outputs/model.pth
+      - outputs/model.pth
     metrics:
-    - outputs/metrics.json
+      - outputs/metrics.json
+
+plots:
+  - outputs/metrics.csv:
+      x: epoch
+      y:
+        - val_acc
+        - val_loss
+        - train_loss
+      title: "Training and Validation Metrics"
+      template: linear
+      x_label: "Epoch"
+      y_label: "Value"
