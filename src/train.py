@@ -12,7 +12,6 @@ import csv
 from src.model import build_model
 from src.data import get_dataloaders
 from src.evaluate import evaluate
-from datetime import datetime
 
 def train(epochs=10, batch_size=64, lr=1e-3, device=None):
     device = device or ("cuda" if torch.cuda.is_available() else "cpu")
@@ -26,10 +25,17 @@ def train(epochs=10, batch_size=64, lr=1e-3, device=None):
     mlflow.set_experiment("fashion_cnn_experiment")
     os.makedirs("outputs", exist_ok=True)
 
-    metrics_csv_path = "outputs/metrics.csv"
-    with open(metrics_csv_path, mode="w", newline="") as csvfile:
-        csv_writer = csv.writer(csvfile)
-        csv_writer.writerow(["epoch", "train_loss", "val_loss", "val_acc"])
+    with open("outputs/metrics.csv", "w", newline="") as f1, \
+         open("outputs/train_val_loss.csv", "w", newline="") as f2, \
+         open("outputs/val_acc.csv", "w", newline="") as f3:
+
+        writer1 = csv.writer(f1)
+        writer2 = csv.writer(f2)
+        writer3 = csv.writer(f3)
+
+        writer1.writerow(["epoch", "train_loss", "val_loss", "val_acc"])
+        writer2.writerow(["epoch", "train_loss", "val_loss"])
+        writer3.writerow(["epoch", "val_acc"])
 
     with mlflow.start_run():
         mlflow.log_param("batch_size", batch_size)
@@ -73,9 +79,17 @@ def train(epochs=10, batch_size=64, lr=1e-3, device=None):
             mlflow.log_metric("val_loss", avg_val_loss, step=epoch)
             mlflow.log_metric("val_acc", val_acc, step=epoch)
 
-            with open(metrics_csv_path, mode="a", newline="") as csvfile:
-                csv_writer = csv.writer(csvfile)  # Jangan pakai tb_writer!
-                csv_writer.writerow([epoch + 1, avg_train_loss, avg_val_loss, val_acc])
+            with open("outputs/metrics.csv", "a", newline="") as f1, \
+                 open("outputs/train_val_loss.csv", "a", newline="") as f2, \
+                 open("outputs/val_acc.csv", "a", newline="") as f3:
+
+                writer1 = csv.writer(f1)
+                writer2 = csv.writer(f2)
+                writer3 = csv.writer(f3)
+
+                writer1.writerow([epoch + 1, avg_train_loss, avg_val_loss, val_acc])
+                writer2.writerow([epoch + 1, avg_train_loss, avg_val_loss])
+                writer3.writerow([epoch + 1, val_acc])
 
             print(f"Epoch [{epoch+1}/{epochs}] | Train Loss: {avg_train_loss:.4f} | Val Loss: {avg_val_loss:.4f} | Val Acc: {val_acc:.2f}%")
 
@@ -96,5 +110,4 @@ def train(epochs=10, batch_size=64, lr=1e-3, device=None):
 
         tb_writer.add_scalar("Loss/Test", test_loss, epochs)
         tb_writer.add_scalar("Accuracy/Test", test_acc * 100, epochs)
-
         tb_writer.close()

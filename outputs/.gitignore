@@ -1,3 +1,5 @@
 /metrics.json
 /model.pth
 /metrics.csv
+/train_val_loss.csv
+/val_acc.csv

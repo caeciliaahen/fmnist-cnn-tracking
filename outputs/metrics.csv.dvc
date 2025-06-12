@@ -1,5 +1,5 @@
 outs:
-- md5: 09dbc27cdac072f57a83722a2e7ab459
-  size: 604
+- md5: 288e54fd10f38aedaf696f00cbb43181
+  size: 587
   hash: md5
   path: metrics.csv

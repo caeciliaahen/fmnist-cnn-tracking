@@ -14,22 +14,25 @@ stages:
       - epochs
     outs:
       - outputs/model.pth
+      - outputs/train_val_loss.csv
+      - outputs/val_acc.csv
     metrics:
       - outputs/metrics.json
 
 plots:
-  - outputs/metrics.csv:
+  - outputs/train_val_loss.csv:
       x: epoch
-      y: [train_loss, val_loss]
-      title: "Training and Validation Loss"
-      template: linear
+      y:
+        - train_loss
+        - val_loss
+      title: "Training vs Validation Loss"
       x_label: "Epoch"
       y_label: "Loss"
 
-  - outputs/metrics.csv:
+  - outputs/val_acc.csv:
       x: epoch
-      y: [val_acc]
+      y:
+        - val_acc
       title: "Validation Accuracy"
-      template: linear
       x_label: "Epoch"
       y_label: "Accuracy (%)"
