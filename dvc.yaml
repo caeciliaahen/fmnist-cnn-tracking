@@ -20,11 +20,16 @@ stages:
 plots:
   - outputs/metrics.csv:
       x: epoch
-      y:
-        - val_acc
-        - val_loss
-        - train_loss
-      title: "Training and Validation Metrics"
+      y: [train_loss, val_loss]
+      title: "Training and Validation Loss"
       template: linear
       x_label: "Epoch"
-      y_label: "Value"
+      y_label: "Loss"
+
+  - outputs/metrics.csv:
+      x: epoch
+      y: [val_acc]
+      title: "Validation Accuracy"
+      template: linear
+      x_label: "Epoch"
+      y_label: "Accuracy (%)"
