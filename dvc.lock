@@ -35,17 +35,17 @@ stages:
     outs:
     - path: outputs/metrics.json
       hash: md5
-      md5: af44479abba2d134de25faf7cda4bf3a
-      size: 63
+      md5: ca7d0a7c332fff6a0901f1f419230c29
+      size: 62
     - path: outputs/model.pth
       hash: md5
-      md5: 2cb2158dec5e37a9e2d2d8d3002c23b8
+      md5: e15b05a7ef02ce7d98729f23b57f168c
       size: 1689256
     - path: outputs/train_val_loss.csv
       hash: md5
-      md5: 3289d68c6a9f4f932071a4a40242393b
-      size: 439
+      md5: 9848f3e8c3bf0f1984fda189b3b6f3f0
+      size: 447
     - path: outputs/val_acc.csv
       hash: md5
-      md5: 3bdab622ec3ee2f1c1164ffba62fda71
-      size: 188
+      md5: 5bc5294eeb91e6a9990f22e1dfea262f
+      size: 164
