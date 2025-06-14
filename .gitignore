@@ -38,3 +38,8 @@ experiment_table.csv
 
 # DVC-tracked outputs
 outputs/*
+
+# Training outputs
+outputs/classification_report.json
+outputs/confusion_matrix.csv
+outputs/predictions.csv
