@@ -13,20 +13,20 @@ stages:
       size: 1222
     - path: src/evaluate.py
       hash: md5
-      md5: e454bd24d6dd3eb9f421bd5569b6f830
-      size: 1583
+      md5: c0a4e2df5d1468f976053faa849caa36
+      size: 2876
     - path: src/model.py
       hash: md5
       md5: b8ce280f8df6207c619fc86b5cf80f5b
       size: 951
     - path: src/train.py
       hash: md5
-      md5: 648a2c285838ac3065b4ae48d9c49df5
-      size: 4536
+      md5: 8bddf9b9e04005605f14ac587e52f00a
+      size: 5556
     - path: train.py
       hash: md5
-      md5: 72661db0b3739ec3cedd3a003b0ee7f8
-      size: 276
+      md5: cedd0a2c5b880c6a6d73422d5035d5e7
+      size: 594
     params:
       params.yaml:
         batch_size: 96
@@ -35,17 +35,17 @@ stages:
     outs:
     - path: outputs/metrics.json
       hash: md5
-      md5: ca7d0a7c332fff6a0901f1f419230c29
-      size: 62
+      md5: 10cc4643ab90c305e12b1c5e507e67bc
+      size: 63
     - path: outputs/model.pth
       hash: md5
-      md5: e15b05a7ef02ce7d98729f23b57f168c
+      md5: be394e993a0ecc5912f5733ac9629a48
       size: 1689256
     - path: outputs/train_val_loss.csv
       hash: md5
-      md5: 9848f3e8c3bf0f1984fda189b3b6f3f0
-      size: 447
+      md5: 5140a4b63b558a49c884d568c481cbb1
+      size: 442
     - path: outputs/val_acc.csv
       hash: md5
-      md5: 5bc5294eeb91e6a9990f22e1dfea262f
-      size: 164
+      md5: 1bc1ce4650a23c649aeb88e5cb7439ce
+      size: 202
