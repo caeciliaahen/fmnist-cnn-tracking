@@ -1,0 +1,40 @@
+# System/OS files
+.DS_Store
+
+# Python build/cache files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pkl
+*.egg-info/
+
+# Jupyter Notebook metadata
+*.ipynb_checkpoints/
+
+# Virtual environment directories
+.venv/
+venv/
+env/
+
+# IDE / Editor config
+.vscode/
+.idea/
+
+# TensorBoard logs
+runs/
+
+# MLflow logs and metadata
+mlruns/
+
+# DVC directories and cache
+.dvc/
+.dvc/tmp/
+.dvc/cache/
+
+# DVC plots and experiment logs
+dvc_plots/
+experiment_table.csv
+
+# DVC-tracked outputs
+outputs/*
