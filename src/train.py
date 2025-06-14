@@ -3,7 +3,6 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torch.utils.tensorboard import SummaryWriter
 import mlflow
 import os
 import json
@@ -12,6 +11,11 @@ import csv
 from src.model import build_model
 from src.data import get_dataloaders
 from src.evaluate import evaluate
+from src.utils import class_names
+from torch.utils.tensorboard import SummaryWriter
+from PIL import Image
+from torchvision import transforms
+from datetime import datetime
 
 def train(epochs=10, batch_size=64, lr=1e-3, device=None):
     device = device or ("cuda" if torch.cuda.is_available() else "cpu")
@@ -21,7 +25,8 @@ def train(epochs=10, batch_size=64, lr=1e-3, device=None):
     optimizer = optim.Adam(model.parameters(), lr=lr)
     train_loader, val_loader, test_loader = get_dataloaders(batch_size)
 
-    tb_writer = SummaryWriter(log_dir="runs")
+    log_dir = f"runs/run_{datetime.now().strftime('%Y%m%d-%H%M%S')}"
+    tb_writer = SummaryWriter(log_dir=log_dir)
     mlflow.set_experiment("fashion_cnn_experiment")
     os.makedirs("outputs", exist_ok=True)
 
@@ -51,6 +56,12 @@ def train(epochs=10, batch_size=64, lr=1e-3, device=None):
                 outputs = model(images)
                 loss = criterion(outputs, labels)
                 loss.backward()
+
+                for name, param in model.named_parameters():
+                    tb_writer.add_histogram(f"{name}/weights", param, epoch)
+                    if param.grad is not None:
+                        tb_writer.add_histogram(f"{name}/grads", param.grad, epoch)
+
                 optimizer.step()
                 running_loss += loss.item()
 
@@ -97,7 +108,7 @@ def train(epochs=10, batch_size=64, lr=1e-3, device=None):
         torch.save(model.state_dict(), model_path)
         mlflow.log_artifact(model_path)
 
-        test_loss, test_acc, _, _ = evaluate(model, test_loader, criterion, device, save_dir="outputs")
+        test_loss, test_acc, _, _ = evaluate(model, test_loader, criterion, device, save_dir="outputs", class_names=class_names)
         print(f"\nTest Loss: {test_loss:.4f} | Test Acc: {test_acc*100:.2f}%")
 
         metrics = {"test_loss": test_loss, "test_acc": test_acc}
@@ -107,7 +118,23 @@ def train(epochs=10, batch_size=64, lr=1e-3, device=None):
         mlflow.log_artifact("outputs/confusion_matrix.csv")
         mlflow.log_artifact("outputs/predictions.csv")
         mlflow.log_artifact("outputs/classification_report.json")
+        mlflow.log_artifact("outputs/sample_predictions.png")
+        
+        img = Image.open("outputs/sample_predictions.png")
+        img_tensor = transforms.ToTensor()(img)
 
         tb_writer.add_scalar("Loss/Test", test_loss, epochs)
         tb_writer.add_scalar("Accuracy/Test", test_acc * 100, epochs)
+        tb_writer.add_hparams(
+            {
+                'lr': lr,
+                'batch_size': batch_size,
+                'epochs': epochs
+            },
+            {
+                'hparam/accuracy': test_acc,
+                'hparam/loss': test_loss
+            }
+        )
+        tb_writer.add_image("Sample Predictions", img_tensor, epochs)
         tb_writer.close()
