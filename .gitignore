@@ -38,6 +38,7 @@ experiment_table.csv
 
 # DVC-tracked outputs
 outputs/*
+outputs/metrics.csv.dvc
 
 # Training outputs
 outputs/classification_report.json
