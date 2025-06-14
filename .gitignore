@@ -36,11 +36,5 @@ mlruns/
 dvc_plots/
 experiment_table.csv
 
-# DVC-tracked outputs
+# Outputs
 outputs/*
-outputs/metrics.csv.dvc
-
-# Training outputs
-outputs/classification_report.json
-outputs/confusion_matrix.csv
-outputs/predictions.csv
