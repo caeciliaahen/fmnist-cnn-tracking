@@ -1,6 +1,6 @@
 # Image Classification & Experiment Tracking
 
-This project demonstrates image classification on the [FashionMNIST](https://github.com/zalandoresearch/fashion-mnist) dataset using a SimpleCNN model, with integrated **experiment tracking** via:
+This project demonstrates image classification on the [FashionMNIST](https://github.com/zalandoresearch/fashion-mnist) dataset using a simple CNN model, with integrated **experiment tracking** via:
 
 - **MLflow** – tracks metrics, parameters, and artifacts
 - **TensorBoard** – visualizes loss/accuracy logs and images
